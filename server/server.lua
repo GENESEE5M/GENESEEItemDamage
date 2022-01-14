@@ -19,7 +19,7 @@ RegisterNetEvent('GENESEEItemDamage:Swimming', function()
     local Player = QBCore.Functions.GetPlayer(src)
     local PlayerCooldown = QBCore.Functions.GetPlayer(src).PlayerData.name
 
-    for a, b in pairs(Config.itemList) do
+    for a, b in pairs(Config.itemListSwimming) do
         local normalItem = b.normalItem
         local damageItem = b.damageItem
         local percentage = 0
@@ -59,6 +59,35 @@ RegisterNetEvent('GENESEEItemDamage:Swimming', function()
                         Player.Functions.AddItem(damageItem, 1, nil, info)
                         TriggerClientEvent('QBCore:Notify', src,
                             'Your ' .. normalItem .. ' burned when you entered the water.', 'success', 5000)
+                        return true
+                    end
+                end
+            end
+        end
+    end
+end)
+
+RegisterNetEvent('GENESEEItemDamage:Accident', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local PlayerCooldown = QBCore.Functions.GetPlayer(src).PlayerData.name
+
+    for a, b in pairs(Config.itemListAccident) do
+        local normalItem = b.normalItem
+        local damageItem = b.damageItem
+        local percentage = 0
+
+        for c, d in pairs(QBCore.Functions.GetPlayer(src).PlayerData.items) do
+            local PlayerItem = d.name
+            local PlayerItemAmount = d.amount
+
+            if PlayerItemAmount > 0 then
+                if normalItem == PlayerItem then
+
+                    if Player.Functions.RemoveItem(normalItem, PlayerItemAmount, nil) then
+                        Player.Functions.AddItem(damageItem, 1, nil, info)
+                        TriggerClientEvent('QBCore:Notify', src, 'Your ' .. normalItem .. ' broke after an accident.',
+                            'success', 5000)
                         return true
                     end
                 end

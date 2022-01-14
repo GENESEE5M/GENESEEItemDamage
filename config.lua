@@ -1,9 +1,14 @@
 Config = Config or {}
 
-Config.itemList = {{ -- 
+Config.itemListSwimming = {{
     ['normalItem'] = 'phone',
     ['damageItem'] = 'phone-damaged'
 }, {
     ['normalItem'] = 'rolling_paper',
     ['damageItem'] = nil
+}}
+
+Config.itemListAccident = {{
+    ['normalItem'] = 'phone',
+    ['damageItem'] = 'phone-broken'
 }}
